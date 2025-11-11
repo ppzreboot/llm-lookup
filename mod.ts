@@ -1,5 +1,5 @@
 import { check_en_word, check_result } from './schema/check.ts'
-import { I_word_details } from './schema/schema.ts'
+import type { I_word_details } from './schema/schema.ts'
 import { make_format } from './schema/response-format.ts'
 
 export
@@ -13,9 +13,10 @@ function make_llm_lookup(opts: {
     base_url: string
     model: string
     api_key: string
-}) {
+}): (word: string) =>
+    Promise<[I_error__llm_lookup, null] | [null, I_word_details[]]> {
     const response_format = make_format()
-    return async function llm_lookup(word: string): Promise<[I_error__llm_lookup, null] | [null, I_word_details[]]> {
+    return async function llm_lookup(word) {
         if (!check_en_word(word))
             return ['invalid word format', null]
         const response = await fetch(opts.base_url + '/chat/completions', {
