@@ -14,5 +14,3 @@ function make_format() {
         }
     }
 }
-
-console.log(make_format())

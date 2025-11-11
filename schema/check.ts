@@ -7,7 +7,7 @@ type I_word = {
     details: null
 } | {
     is_valid: true
-    details: I_word_details
+    details: I_word_details[]
 }
 
 export
@@ -22,4 +22,10 @@ function check_result(raw: unknown): raw is I_word {
         else
             throw err
     }
+}
+
+export
+function check_en_word(word: string) {
+    if (word.length === 0 || word.length > 50) return false
+    return /^[A-Za-z]+(-[A-Za-z]+)*$/.test(word)
 }
