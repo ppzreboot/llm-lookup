@@ -3,18 +3,30 @@ import { z } from 'zod'
 export
 const z_schema__word_details = z.object({
     canonical: z.string().describe('the canonical form if the queried word is an inflected form, e.g., "running" → "run", "dogs" → "dog", "faster" → "fast"'),
+    phonetic: z.string().describe('the phonetic pronunciation of the word'),
     root_and_affixes: z.object({
         root: z.string().describe('the root or stem of the word'),
-        prefixes: z.array(z.string()).describe('the prefixes of the word, e.g., "un-" for "unhappy"'),
-        suffixes: z.array(z.string()).describe('the suffixes of the word, e.g., "-ly" for "quickly"'),
-    }).nullable().describe('null if the word is a root or has no affixes'),
+        root_explanation: z.string().describe('用中文解释词根的含义'),
+        prefixes: z.array(
+            z.object({
+                prefix: z.string().describe('the prefix of the word, e.g., "un-" for "unhappy"'),
+                prefix_explanation: z.string().describe('用中文解释前缀的含义'),
+            })
+        ),
+        suffixes: z.array(
+            z.object({
+                suffix: z.string().describe('the suffixes of the word, e.g., "-ly" for "quickly"'),
+                suffix_explanation: z.string().describe('用中文解释后缀的含义'),
+            })
+        ),
+    }).describe('null if the word is a root or has no affixes'),
     meaning: z.array(
         z.object({
-            definition: z.string().describe('Dictionary-style explanation'),
+            definition: z.string().describe('用中文解释单词的含义 (字典风格）'),
             example: z.string().describe('an example sentence using the word'),
         })
     ),
-    mnemonic: z.string().describe('Creative associative memory technique'),
+    mnemonic: z.string().describe('用联想记忆法 帮助记忆单词的含义'),
     word_family: z.array(z.string()).describe('Related words derived from the base word or compound components'),
 })
 

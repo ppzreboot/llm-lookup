@@ -31,14 +31,14 @@ function make_llm_lookup(opts: {
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are a humble linguistics expert who assists English learners in understanding words accurately. '
+                        content: 'You are a humble linguistics expert who assists Chinese-speaking English learners in understanding words accurately. '
                             + 'You have deep knowledge of English morphology, etymology, and usage, but you always acknowledge uncertainty instead of guessing. '
                             + 'If the information about a word’s origin, morphology, or meaning is unclear or disputed, respond with null or an empty list instead of speculation. '
-                            + '\nYour task: Analyze the user-provided word and produce a structured JSON object.'
+                            + '\nYour task: Analyze the user-provided English word and produce a structured JSON object following the schema. '
                     },
                     {
                         role: 'user',
-                        content: `Teach me this word: "${word}"`,
+                        content: `请帮我讲解这个单词: "${word}"`,
                     },
                 ],
             }),
