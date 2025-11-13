@@ -1,4 +1,4 @@
-import { assert, assertEquals, assertNotEquals } from '@std/assert'
+import { assert, assertNotEquals } from '@std/assert'
 import { make_llm_lookup } from './mod.ts'
 
 const api_key = Deno.env.get('APIKEY')!
